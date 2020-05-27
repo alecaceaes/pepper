@@ -33,4 +33,14 @@ export class AppComponent {
       console.log(res);
     })
   }
+
+  callAPI() {
+    this.http.get('http://localhost:8080/authorized', {
+      responseType: 'text',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`
+      }
+    })
+    .subscribe(res => console.log(res));
+  }
 }

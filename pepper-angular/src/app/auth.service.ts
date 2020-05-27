@@ -11,10 +11,7 @@ export class Auth {
         {
             auth: {
                 responseType: 'token id_token',      
-                audience: 'https://dev-pepper.auth0.com/api/v2/',          
-                params: {                    
-                    scope: 'openid profile email update:current_user_metadata' // Learn about scopes: https://auth0.com/docs/scopes
-                }
+                audience: 'https://api.dev-pepper.com'
             },
             additionalSignUpFields: [
                 {

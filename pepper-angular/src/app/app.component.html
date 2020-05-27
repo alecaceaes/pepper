@@ -3,3 +3,4 @@
 <button (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Logout</button> 
 <button (click)="showProfile()" *ngIf="auth.isAuthenticated()">Show Profile</button> 
 <button (click)="updateProfile()" *ngIf="auth.isAuthenticated()">Update Profile</button> 
+<button (click)="callAPI()" *ngIf="auth.isAuthenticated()">Call API</button> 
