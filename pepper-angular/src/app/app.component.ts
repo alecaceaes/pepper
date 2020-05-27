@@ -13,4 +13,8 @@ export class AppComponent {
 
   }
 
+  showProfile() {
+    console.log(this.auth.userProfile);
+  }
+
 }

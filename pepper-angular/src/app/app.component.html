@@ -1,3 +1,4 @@
 <h1>{{title}}</h1>
 <button (click)="auth.login()" *ngIf="!auth.isAuthenticated()">Login</button>
 <button (click)="auth.logout()" *ngIf="auth.isAuthenticated()">Logout</button> 
+<button (click)="showProfile()" *ngIf="auth.isAuthenticated()">Show Profile</button> 
