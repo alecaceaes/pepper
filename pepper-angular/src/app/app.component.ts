@@ -8,8 +8,12 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class AppComponent {
   title = 'pepper-angular';
+  cuisines;
 
   constructor(af: AngularFireDatabase) {
-    console.log(af);
+    af.list('cuisines').snapshotChanges().subscribe(x => {
+      this.cuisines = x;
+      console.log(this.cuisines)
+    })
   }
 }
