@@ -29,4 +29,14 @@ export class AppComponent implements OnInit {
       }
     });
   }	  
+
+  update() {
+    // this.af.object('restaurant').update({
+    // this.af.object('restaurant').set({
+    //   name: 'New Name',
+    //   rating: 5
+    // })
+    // this.af.object('favorites/1/10').set(true);
+    this.af.object('favorites/1/10').set(null);
+  }
 }
