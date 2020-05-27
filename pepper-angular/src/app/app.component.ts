@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
@@ -6,14 +6,15 @@ import { AngularFireDatabase } from '@angular/fire/database';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'pepper-angular';
   cuisines;
 
-  constructor(af: AngularFireDatabase) {
-    af.list('cuisines').snapshotChanges().subscribe(x => {
-      this.cuisines = x;
-      console.log(this.cuisines)
-    })
+  constructor(private af: AngularFireDatabase) {
+
   }
+
+  ngOnInit() {
+    this.cuisines = this.af.list('cuisines').snapshotChanges();
+  }	  
 }
