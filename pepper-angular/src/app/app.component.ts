@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   subscription: AngularFireList<any>; 
   cuisines: Observable<any[]>;
   restaurants: Observable<any[]>;
-  exists;
 
   constructor(private af: AngularFireDatabase) {
 
@@ -21,14 +20,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.cuisines = this.af.list('cuisines').snapshotChanges();
-    this.restaurants = this.af.list('restaurants').valueChanges();
-    
-    this.exists = this.af.object('restaurants/1/features/1').valueChanges();
-
-    this.exists.pipe(take(1)).subscribe(x => {
-      if (x) console.log("EXISTS");if (x) console.log("EXISTS");
-      else console.log("NOT EXISTS");
-    })  
+    this.restaurants = this.af.list('restaurants', r => r.orderByChild('address/city')).valueChanges();
   }	  
   
 }
