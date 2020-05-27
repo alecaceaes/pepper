@@ -15,7 +15,20 @@ export class Auth {
                 params: {                    
                     scope: 'openid profile email update:current_user_metadata' // Learn about scopes: https://auth0.com/docs/scopes
                 }
-            }
+            },
+            additionalSignUpFields: [
+                {
+                    name: 'Location',
+                    placeholder: 'Where do you live?',
+                    validator: function(value) {
+                        return {
+                            valid: value.length >=5,
+                            hint: 'Address should be minimum 5 characters.'
+                        }
+                    }
+
+                }
+            ]
         }
     )
 
