@@ -19,10 +19,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.restaurants = this.af.list('restaurants', r => 
-    r.orderByChild('rating')
-      .equalTo(5)
-      .limitToLast(50)).valueChanges();
-  }	  
-  
+    this.af.list('restaurants').push({ name: '' })
+      .then(x => {
+        console.log(x.key)
+        let restaurant = { name: "My Restaurant" };
+
+        let update = {};
+        // update['restaurants/' + x.key] = restaurant;
+        update['restaurants/' + x.key] = null;
+        // update['restaurants-by-city/camberwell/' + x.key] = true;
+        // update['restaurants-by-city/camberwell/' + x.key] = restaurant;
+        update['restaurants-by-city/camberwell/' + x.key] = null;
+        this.af.object('/').update(update);
+      })
+  }  
 }
