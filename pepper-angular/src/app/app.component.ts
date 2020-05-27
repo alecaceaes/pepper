@@ -39,4 +39,10 @@ export class AppComponent implements OnInit {
     // this.af.object('favorites/1/10').set(true);
     this.af.object('favorites/1/10').set(null);
   }
+
+  remove() {
+    this.af.object('restaurant').remove()
+      .then(x => console.log("SUCCESS"))
+      .catch(error => console.log("ERROR", error));
+  }
 }
