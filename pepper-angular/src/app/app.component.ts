@@ -7,20 +7,10 @@ import { Auth } from './auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title: 'app works!'
 
-  constructor(private auth: Auth) {
-
-  }
-
-  register() {
-    
-  }
-
-  login() {
+  constructor(public auth: Auth) {
 
   }
 
-  logout() {
-
-  }
 }

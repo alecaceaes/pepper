@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { Auth } from './auth.service';
 
 export function tokenGetter() {
-  return localStorage.getItem("access_token");
+  return localStorage.getItem("id_token");
 }
 
 @NgModule({

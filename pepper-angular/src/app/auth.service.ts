@@ -4,12 +4,20 @@ import Auth0Lock from 'auth0-lock'
 
 @Injectable()
 export class Auth {
-    lock = new Auth0Lock('5hJ1e3msoz5K4q009FeJqgQe3bLwCL3C', 'dev-pepper.auth0.com')
+    lock = new Auth0Lock(
+        '5hJ1e3msoz5K4q009FeJqgQe3bLwCL3C', 
+        'dev-pepper.auth0.com', 
+        {
+            auth: {
+                responseType: 'token id_token'
+            }
+        }
+    )
 
     constructor(public jwtHelper: JwtHelperService) {
         this.lock.on('authenticated', authResult => {
             console.log(authResult)
-            localStorage.setItem('access_token', authResult.accessToken);
+            localStorage.setItem('id_token', authResult.idToken);
         })        
     }
 
@@ -18,10 +26,11 @@ export class Auth {
     }
 
     isAuthenticated() {
-        return this.jwtHelper.isTokenExpired()
+        let token = this.jwtHelper.tokenGetter()
+        return !this.jwtHelper.isTokenExpired(token)
     }
 
     logout() {
-        localStorage.removeItem('access_token');
+        localStorage.removeItem('id_token');
     }
 }
