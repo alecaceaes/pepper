@@ -9,6 +9,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class AppComponent implements OnInit {
   title = 'pepper-angular';
   cuisines;
+  restaurant;
 
   constructor(private af: AngularFireDatabase) {
 
@@ -16,5 +17,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.cuisines = this.af.list('cuisines').snapshotChanges();
+    this.restaurant = this.af.object('restaurant').valueChanges();
   }	  
 }
