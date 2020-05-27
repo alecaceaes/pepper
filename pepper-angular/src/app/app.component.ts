@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { Observable } from 'rxjs/internal/Observable';
-import { map, take } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -9,28 +8,23 @@ import { map, take } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'pepper-angular';
-  subscription: AngularFireList<any>; 
-  cuisines: Observable<any[]>;
-  restaurants: Observable<any[]>;
-
-  constructor(private af: AngularFireDatabase) {
+  
+  constructor(private auth: AngularFireAuth) {
 
   }
 
   ngOnInit() {
-    this.af.list('restaurants').push({ name: '' })
-      .then(x => {
-        console.log(x.key)
-        let restaurant = { name: "My Restaurant" };
-
-        let update = {};
-        // update['restaurants/' + x.key] = restaurant;
-        update['restaurants/' + x.key] = null;
-        // update['restaurants-by-city/camberwell/' + x.key] = true;
-        // update['restaurants-by-city/camberwell/' + x.key] = restaurant;
-        update['restaurants-by-city/camberwell/' + x.key] = null;
-        this.af.object('/').update(update);
-      })
+    
   }  
+
+  login() {
+    let provider = new auth.FacebookAuthProvider();
+    this.auth.signInWithPopup(provider).then(authState => {
+      console.log("AFTER LOGIN", authState);
+    })
+  }
+
+  logout() {
+    this.auth.signOut();
+  }
 }
