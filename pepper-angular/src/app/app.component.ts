@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Auth } from './auth.service';
 
@@ -9,7 +10,7 @@ import { Auth } from './auth.service';
 export class AppComponent {
   title: 'app works!'
 
-  constructor(public auth: Auth) {
+  constructor(public auth: Auth, private http: HttpClient) {
 
   }
 
@@ -17,4 +18,19 @@ export class AppComponent {
     console.log(this.auth.userProfile);
   }
 
+  updateProfile() {
+    var url = 'https://dev-pepper.auth0.com/api/v2/users/' + this.auth.userProfile.sub;
+    var data = {
+      user_metadata: {
+        location: 'Melbourne'
+      }
+    }
+    this.http.patch(url, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`
+      }
+    }).subscribe(res => {
+      console.log(res);
+    })
+  }
 }

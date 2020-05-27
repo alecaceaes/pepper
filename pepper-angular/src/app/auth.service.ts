@@ -10,7 +10,11 @@ export class Auth {
         'dev-pepper.auth0.com', 
         {
             auth: {
-                responseType: 'token id_token'
+                responseType: 'token id_token',      
+                audience: 'https://dev-pepper.auth0.com/api/v2/',          
+                params: {                    
+                    scope: 'openid profile email update:current_user_metadata' // Learn about scopes: https://auth0.com/docs/scopes
+                }
             }
         }
     )
@@ -20,7 +24,8 @@ export class Auth {
 
 
         this.lock.on('authenticated', authResult => {
-
+            console.log(authResult)
+            localStorage.setItem('access_token', authResult.accessToken);
             localStorage.setItem('id_token', authResult.idToken);
             this.lock.getProfile(authResult.accessToken, (error, profile) => {
                 if (error) {
@@ -45,6 +50,7 @@ export class Auth {
 
     logout() {
         localStorage.removeItem('id_token');
+        localStorage.removeItem('access_token');
         localStorage.removeItem('profile');
         this.userProfile = null;
     }
