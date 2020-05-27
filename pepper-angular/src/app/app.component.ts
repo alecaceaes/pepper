@@ -19,39 +19,23 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.auth.authState.subscribe(authState => {
-      if (!authState){
-        this.displayName = null;
-        this.photoURL = null;
-        return;
-      }
-
-      let userRefSub = this.af.object('users/' + authState.uid);
-      let userRef = userRefSub.valueChanges();
-      userRef.subscribe((user: any) => {
-        let url = `https://graph.facebook.com/v7.0/me?fields=id%2Cfirst_name%2Clast_name%2Cgender&access_token=${user.accessToken}`;
-        this.http.get(url).subscribe(response => {
-          let user = response;
-          userRefSub.update({
-            firstName: user['first_name'],
-            lastName: user['last_name']
-          })
-        })
-      })
-
-      console.log(authState)
-      this.displayName = authState.displayName
-      this.photoURL = authState.photoURL; 
+      
     })
   }  
 
-  login() {
-    let provider = new auth.FacebookAuthProvider();
-    this.auth.signInWithPopup(provider).then((authState: any) => {
-      console.log("AFTER LOGIN", authState);
-      this.af.object('users/' + authState.user.uid).update({
-        accessToken: authState.credential.accessToken
+  register() {
+    this.auth.createUserWithEmailAndPassword('user@pepper.com', 'Pass.123')
+      // .then(authState => console.log("REGISTER-THEN", authState))
+      .then(authState => {
+        authState.user.sendEmailVerification();
       })
-    }).catch(err => console.log(err))
+      .catch(error => console.log("REGISTER-ERROR", error))
+  }
+
+  login() {
+    this.auth.signInWithEmailAndPassword('user@pepper.com', 'Pass.123')
+      .then(authState => console.log("LOGIN-THEN", authState))
+      .catch(error => console.log("LOGIN-ERROR", error))
   }
 
   logout() {
