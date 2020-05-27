@@ -22,11 +22,12 @@ export class AppComponent implements OnInit {
     this.cuisines = this.af.list('cuisines').snapshotChanges();
     this.restaurants = this.af.list('restaurants').valueChanges().pipe(
       map(restaurants => {
-        console.log("BEFORE MAP", restaurants);
         restaurants.map(restaurant => {
-          restaurant['cuisineType'] = this.af.object('cuisines/' + restaurant['cuisine']).valueChanges();
+          restaurant['featureTypes'] = [];
+          for (var f in restaurant['features'])
+            restaurant['featureTypes'].push(this.af.object('features/' + f).valueChanges());
         })
-        console.log("AFTER MAP", restaurants);
+
         return restaurants;
       })
     );
