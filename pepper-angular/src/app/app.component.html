@@ -1,5 +1,5 @@
 <h1>{{title}}</h1>
+<button (click)="add()">Add</button>
 <ul>
   <li *ngFor="let c of cuisines | async ">{{ c.payload.val() }}</li>
-</ul> 
-{{ (restaurant | async)?.name  }} 
+</ul>
