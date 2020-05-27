@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { auth } from 'firebase/app';
 
 @Component({
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit {
   displayName;
   photoURL;
 
-  constructor(private auth: AngularFireAuth) {
+  constructor(private auth: AngularFireAuth, private af: AngularFireDatabase) {
 
   }
 
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
         return;
       }
 
+      console.log("AUTHSTATE", authState);
       this.displayName = authState.displayName
       this.photoURL = authState.photoURL; 
     })
@@ -30,11 +32,11 @@ export class AppComponent implements OnInit {
 
   login() {
     let provider = new auth.FacebookAuthProvider();
-    provider.setCustomParameters({
-      'display': 'popup'
-    });
-    this.auth.signInWithPopup(provider).then(authState => {
+    this.auth.signInWithPopup(provider).then((authState: any) => {
       console.log("AFTER LOGIN", authState);
+      this.af.object('users/' + authState.user.uid).update({
+        accessToken: authState.credential.accessToken
+      })
     }).catch(err => console.log(err))
   }
 
