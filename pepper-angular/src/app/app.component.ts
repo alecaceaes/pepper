@@ -20,7 +20,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.cuisines = this.af.list('cuisines').snapshotChanges();
-    this.restaurants = this.af.list('restaurants', r => r.orderByChild('address/city')).valueChanges();
+    this.restaurants = this.af.list('restaurants', r => 
+      r.orderByChild('rating')
+      .startAt(3)
+      .endAt(4)).valueChanges();
   }	  
   
 }
