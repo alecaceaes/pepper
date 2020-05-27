@@ -3,8 +3,14 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtModule, JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
+import { Auth } from './auth.service';
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -13,9 +19,16 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      },
+    })
   ],
-  providers: [],
+  providers: [
+    Auth
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
