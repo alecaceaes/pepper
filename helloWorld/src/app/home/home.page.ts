@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
   items = ['Item1', 'Item2', 'Item3'];
-  
-  constructor() {}
 
-}
+  constructor(public router: Router) {}
+
+  selectItem(item) {
+    this.router.navigate(['/item-details'], { queryParams: { item: item } });
+  }
+ }

@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-details.page.scss'],
 })
 export class ItemDetailsPage implements OnInit {
-
-  constructor() { }
+  item;
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.item = params.item;
+    });
   }
 
 }
