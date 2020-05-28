@@ -1,5 +1,5 @@
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-item-details',
@@ -8,12 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemDetailsPage implements OnInit {
   item;
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private modalCtrl: ModalController,
+    private navParams: NavParams) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.item = params.item;
-    });
+    this.item = this.navParams.get('item');
   }
 
+  cancel() {
+    this.modalCtrl.dismiss();
+  }
+
+  done() {
+    this.modalCtrl.dismiss();
+  }
 }

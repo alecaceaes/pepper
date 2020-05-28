@@ -1,4 +1,6 @@
+import { ItemDetailsPage } from './../item-details/item-details.page';
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,9 +11,16 @@ import { Router } from '@angular/router';
 export class HomePage {
   items = ['Item1', 'Item2', 'Item3'];
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, public modalCtrl: ModalController) {}
 
-  selectItem(item) {
-    this.router.navigate(['/item-details'], { queryParams: { item: item } });
+  async selectItem(item) {
+    const modal = await this.modalCtrl.create({
+      component: ItemDetailsPage,
+      componentProps: {
+        item: item
+      }
+    })
+
+    return modal.present();
   }
  }

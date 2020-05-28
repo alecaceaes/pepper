@@ -1,6 +1,12 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar>    
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
     <ion-title>Item Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="done()">Done</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
