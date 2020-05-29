@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  items = ['Item1', 'Item2', 'Item3'];
+  items = [
+    { description: 'Item1' },
+    { description: 'Item2' },
+    { description: 'Item3' }
+  ];
 
   constructor(public router: Router, public modalCtrl: ModalController) {}
 
