@@ -2,9 +2,8 @@ import { ItemDetailsPage } from './../item-details/item-details.page';
 import { Component } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { AppVersion } from '@ionic-native/app-version/ngx';
-import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts/ngx';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 
 const PHOTOLIBRARY = 0;
 
@@ -20,16 +19,16 @@ export class HomePage {
     public router: Router,
     public modalCtrl: ModalController,
     public platform: Platform,
-    public appVersion: AppVersion,
-    private Contacts: Contacts,
-    private Camera: Camera) {
+    public Geolocation: Geolocation
+    ) {
       platform.ready().then(() => {
-        appVersion.getVersionNumber().then(v => console.log('Version ', v));
-        Contacts.find(['displayName']).then(c => this.contacts = c);
-        Camera.getPicture({
-          sourceType: PHOTOLIBRARY
-        }).then(imgData => console.log("IMAGE", imgData));
-
+        Geolocation.getCurrentPosition({ 
+          enableHighAccuracy: true,
+          maximumAge: 3000,
+          timeout: 5000 }).then(pos => {
+            console.log('LONGITUDE', pos.coords.longitude)
+            console.log('LATITUDE', pos.coords.latitude)
+          });
       });
   }
 
