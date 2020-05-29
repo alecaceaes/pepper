@@ -4,6 +4,9 @@ import { ModalController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
+const PHOTOLIBRARY = 0;
 
 @Component({
   selector: 'app-home',
@@ -18,10 +21,15 @@ export class HomePage {
     public modalCtrl: ModalController,
     public platform: Platform,
     public appVersion: AppVersion,
-    private Contacts: Contacts) {
+    private Contacts: Contacts,
+    private Camera: Camera) {
       platform.ready().then(() => {
         appVersion.getVersionNumber().then(v => console.log('Version ', v));
         Contacts.find(['displayName']).then(c => this.contacts = c);
+        Camera.getPicture({
+          sourceType: PHOTOLIBRARY
+        }).then(imgData => console.log("IMAGE", imgData));
+
       });
   }
 

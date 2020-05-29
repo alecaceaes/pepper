@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Contacts } from '@ionic-native/contacts/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { Contacts } from '@ionic-native/contacts/ngx';
     SplashScreen,
     AppVersion,
     Contacts,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
