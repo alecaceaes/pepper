@@ -1,7 +1,8 @@
 import { ItemDetailsPage } from './../item-details/item-details.page';
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,15 @@ export class HomePage {
     { description: 'Item3' }
   ];
 
-  constructor(public router: Router, public modalCtrl: ModalController) {}
+  constructor(
+    public router: Router,
+    public modalCtrl: ModalController,
+    public platform: Platform,
+    public appVersion: AppVersion) {
+      platform.ready().then(() => {
+        appVersion.getVersionNumber().then(v => console.log('Version ', v));
+      });
+  }
 
   async selectItem(item) {
     const modal = await this.modalCtrl.create({

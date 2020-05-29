@@ -13,6 +13,7 @@ export class ItemDetailsPage implements OnInit {
 
   ngOnInit() {
     this.item = this.navParams.get('item');
+    console.log(this.item);
   }
 
   cancel() {
