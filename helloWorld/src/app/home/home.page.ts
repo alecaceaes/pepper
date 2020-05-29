@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts/ngx';
 
 @Component({
   selector: 'app-home',
@@ -10,19 +11,17 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  items = [
-    { description: 'Item1' },
-    { description: 'Item2' },
-    { description: 'Item3' }
-  ];
+  contacts;
 
   constructor(
     public router: Router,
     public modalCtrl: ModalController,
     public platform: Platform,
-    public appVersion: AppVersion) {
+    public appVersion: AppVersion,
+    private Contacts: Contacts) {
       platform.ready().then(() => {
         appVersion.getVersionNumber().then(v => console.log('Version ', v));
+        Contacts.find(['displayName']).then(c => this.contacts = c);
       });
   }
 
