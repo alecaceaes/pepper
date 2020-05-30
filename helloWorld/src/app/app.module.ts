@@ -1,4 +1,4 @@
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { GoogleMap, GoogleMaps } from '@ionic-native/google-maps';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -9,9 +9,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AppVersion } from '@ionic-native/app-version/ngx';
-import { Contacts } from '@ionic-native/contacts/ngx';
-import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,10 +17,6 @@ import { Camera } from '@ionic-native/camera/ngx';
   providers: [
     StatusBar,
     SplashScreen,
-    AppVersion,
-    Contacts,
-    Camera,
-    Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
