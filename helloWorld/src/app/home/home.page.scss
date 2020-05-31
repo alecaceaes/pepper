@@ -25,3 +25,9 @@
 #container a {
   text-decoration: none;
 }
+
+:host {
+  #map_canvas {
+    height: 100%;
+  }
+} 
