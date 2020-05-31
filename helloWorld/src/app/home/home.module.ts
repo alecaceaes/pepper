@@ -18,8 +18,4 @@ import { HomePageRoutingModule } from './home-routing.module';
 })
 export class HomePageModule {
 
-  click() {
-    console.log("Button was clicked.")
-  }
-
 }
