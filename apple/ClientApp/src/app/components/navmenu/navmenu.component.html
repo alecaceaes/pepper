@@ -1,0 +1,33 @@
+<header>
+    <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+        <div class="container">
+            <a class='navbar-brand' [routerLink]="['/home']">HelloWorld</a>
+            <button type='button' 
+            class='navbar-toggler' 
+            data-toggle='collapse' data-target='.navbar-collapse'>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class='navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse'>
+                <ul class='navbar-nav flex-grow'>
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <a class="nav-link text-dark" [routerLink]="['/counter']">
+                            <span class='glyphicon glyphicon-education'></span> Counter
+                        </a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <a class="nav-link text-dark" [routerLink]="['/fetch-data']">
+                            <span class='glyphicon glyphicon-th-list'></span> Fetch data
+                        </a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <a class="nav-link text-dark" [routerLink]="['/patient']">
+                            <span class='glyphicon glyphicon-th-list'></span> Patient
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </nav>
+</header>
