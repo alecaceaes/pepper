@@ -1,5 +1,17 @@
 import { Component, DoCheck } from '@angular/core';
 
+class ChangeDetector {
+  private _oldState;
+
+  constructor(input) {
+    this._oldState = input;
+  }
+
+  isStateChange(input) {
+    return (this._oldState != input);
+  }
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +26,12 @@ export class AppComponent implements DoCheck {
   ];
 
   constructor() {
-    setTimeout(() => {}, 3000);
+    let input = 'apple';
+    let cd = new ChangeDetector(input);
+
+    input = input.toLocaleUpperCase();
+
+    console.log(cd.isStateChange(input));
   }
 
   ngDoCheck() {
