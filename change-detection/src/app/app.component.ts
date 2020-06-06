@@ -19,29 +19,41 @@ class ChangeDetector {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements DoCheck {
-  title = 'change-detection';
-  movies = [
-    Map({ title: 'm1', genre: 1 }),
-    Map({ title: 'm2' }),
-    Map({ title: 'm3' })
-  ];
+  title = 'Hello World'; 
+  // movies = [];
+  movies;
 
   constructor() {
-    // let movie = Map({ title: 'm1', genre: 1});
-    // movie.get('title');
-    // movie = movie.set('title', 'NEW TITLE');
+    let movies = [];
+    for (let i = 0; i < 10000; i++)
+      // this.movies.push({ 
+      movies.push({ 
+        title: 'm ' + i, 
+        prop1: 1,
+        prop2: 1,
+        prop3: 1,
+        prop4: 1,
+        prop5: 1,
+        prop6: 1,
+        prop7: 1,
+        prop8: 1,
+        prop9: 1,
+        prop10: 1,
+      });
 
-    // let list = List([1, 2, 3]);
-    // list = list.push(4);
-    
+      this.movies = List(movies);
   }
 
-  ngDoCheck() {
-    console.log('AppComponent-DoCheck');
+  changeTitle() { 
+    this.title = 'UPDATED TITLE' ;
+  }
+
+  ngDoCheck() { 
+    // console.log("AppComponent-DoCheck");
   }
 
   onClick() {
-    var movie = this.movies[0];
+    let movie = this.movies[0];
     this.movies[0] = movie.set('title', 'UPDATED');
   }
 }

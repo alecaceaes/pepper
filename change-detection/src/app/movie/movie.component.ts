@@ -3,8 +3,7 @@ import { Component, OnInit, Input, DoCheck, ChangeDetectionStrategy } from '@ang
 @Component({
   selector: 'movie',
   templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./movie.component.css']
 })
 export class MovieComponent implements DoCheck {
   @Input() movie;
@@ -12,7 +11,7 @@ export class MovieComponent implements DoCheck {
   constructor() { }
 
   ngDoCheck() {
-    console.log('MovieComponent-DoCheck');
+    // console.log('MovieComponent-DoCheck');
   }
 
 }
