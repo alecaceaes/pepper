@@ -6,10 +6,14 @@ import { fromJS, Map } from 'immutable';
 
 import { AppComponent } from './app.component';
 import { IAppState, rootReducer, INITIAL_STATE } from './store';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TodoListComponent,
+    TodoDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +23,7 @@ import { IAppState, rootReducer, INITIAL_STATE } from './store';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(ngRedux: NgRedux<Map<string, any>>) {
-    ngRedux.configureStore(rootReducer, fromJS(INITIAL_STATE), []);
+  constructor(ngRedux: NgRedux<IAppState>){
+    ngRedux.configureStore(rootReducer, INITIAL_STATE);
   }
 }
