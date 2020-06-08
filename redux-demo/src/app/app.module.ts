@@ -1,5 +1,4 @@
 import { HttpClientModule } from '@angular/common/http';
-import { TodoService } from './todo-dashboard/todo.service';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, isDevMode } from '@angular/core';
@@ -7,19 +6,20 @@ import { NgRedux, NgReduxModule, DevToolsExtension } from '@angular-redux/store'
 
 import { AppComponent } from './app.component';
 import { IAppState, rootReducer, INITIAL_STATE } from './store';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.component';
+import { TodosModule } from './tasking/todos.module';
+import { MessagingModule } from './messaging/messaging.module';
+import { TodoService } from './tasking/todo-list/todo.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TodoListComponent,
-    TodoDashboardComponent
+    AppComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
-    NgReduxModule
+    NgReduxModule,
+    TodosModule,
+    MessagingModule
   ],
   providers: [
     TodoService
@@ -27,10 +27,7 @@ import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.componen
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(
-    ngRedux: NgRedux<IAppState>,
-    devTools: DevToolsExtension){
-    let enhancers = isDevMode() ? [devTools.enhancer()] : [];
-    ngRedux.configureStore(rootReducer, INITIAL_STATE, [], enhancers);
+  constructor(ngRedux: NgRedux<IAppState>){
+    ngRedux.configureStore(rootReducer, INITIAL_STATE);
   }
 }
