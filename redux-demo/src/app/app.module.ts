@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { TodoService } from './todo-dashboard/todo.service';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, isDevMode } from '@angular/core';
@@ -15,10 +17,13 @@ import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.componen
     TodoDashboardComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     NgReduxModule
   ],
-  providers: [],
+  providers: [
+    TodoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
